@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 align="center">제어문</h1>
+
+    <h2>th:if, th:unless</h2>
+    <h3>
+        th:if는 변수 표현식의 OGNL을 활용한 조건식으로 조건문을 작성하면 결과가 true일 때 해당 태그범위가 처리된다.
+        th:unless는 표현식의 OGNL을 활용한 결과가 false일 때 해당 태그 범위가 처리된다.
+    </h3>
+    <p th:if="${ num > 0 }">넘어온 값은 0보다 크다.</p>
+    <p th:if="${ num < 0 }">넘어온 값은 0보다 작다.</p>
+    <p th:unless="${ num < 0 }">넘어온 값은 0보다 크다</p>
+
+    <th:block th:if="${ str == '사과' }">
+        <p>사과 좋아요!</p>
+    </th:block>
+    <th:block th:if="${ str =='바나나' }">
+        <p>바나나 좋아요!</p>
+    </th:block>
+
+    <p th:if="${ num > 0 or num <= 10 }"> 1부터 10까지의 양수</p>
+    <p th:if="${ str != null and str == '바나나'}">바나나 좋아요!</p>
+
+    <!-- 타임리프에서는 기본적으로 제공되는 Utility Objects의 기능들을 통해 값을 손쉽게 원하는 값으로 처리할 수 있다.
+         - Strings
+         - Numbers
+         - Objects
+         - Arrays
+         - Lists
+         - Maps
+         - Messages
+         - Dates
+         - Calendars
+     -->
+    <p th:if="${ !#strings.isEmpty(str) and str == '바나나' }">바나나 좋아요!</p>
+
+    <h2>th:switch, th:case</h2>
+    <h3>th:switch와 th:case를 통해 해당 조건의 값이 어떤 case에 해당되는지에 따라 태그를 선택할 수 있다.</h3>
+    <th:block th:switch="${str}">
+        <span th:case="사과">사과가 선택되었습니다.</span>
+        <span th:case="바나나">바나나가 선택되었습니다.</span>
+    </th:block>
+
+    <h2>th:each</h2>
+    <h3>
+        th:each를 통해 태그들을 반복할 수 있다.
+    </h3>
+    <table border="1">
+        <tr>
+            <th>이름</th>
+            <th>나이</th>
+            <th>성별</th>
+            <th>주소</th>
+        </tr>
+        <tr th:each="member : ${ memberList }">
+            <td th:text="${ member.name }"></td>
+            <td th:text="${ member.age} "></td>
+            <td th:text="${ member.gender }"></td>
+            <td th:text="${ member.address }"></td>
+        </tr>
+    </table>
+
+    <h3>#numbers Utility Object를 이용하여 반복문 작성하기</h3>
+    <th:block th:each="num : ${ #numbers.sequence(5, 10) }">
+        <a th:href="@{|/numbering/${numStat}|}" th:text="번호 + ${ num }"></a>
+    </th:block>
+</body>
+</html>
