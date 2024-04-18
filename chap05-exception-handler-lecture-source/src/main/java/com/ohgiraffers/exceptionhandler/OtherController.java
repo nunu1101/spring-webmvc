@@ -14,4 +14,23 @@ public class OtherController {
 
         return "/";
     }
+
+    @GetMapping("other-controller-user")
+    public String otherUserExceptionTest() throws MemberRegistException {
+
+        boolean check = true;
+        if (check) {
+            throw new MemberRegistException("혼자야?");
+        }
+        return "/";
+    }
+
+    @GetMapping("other-controller-array")
+    public String otherArrayExceptionTest() {
+
+        double[] array = new double[0];
+        System.out.println(array[0]);
+
+        return "/";
+    }
 }
