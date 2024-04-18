@@ -16,10 +16,10 @@
     <h3>문자열로 뷰 이름 반환하면서 flashAttribute 추가 하기</h3>
     <button onclick="location.href='string-redirect-attr'">문자열로 뷰 이름 반환하여 리다이렉트 & flashAttr 사용하기</button>
     <script>
-        const flashMessage1 = `[[${ flashMessage1 }]]`;
+        const flashMessage1 = '[[${ flashMessage1 }]]';
         console.log(flashMessage1);
         if (flashMessage1) {
-            alert(flashMessage1)
+            alert(flashMessage1);
         }
     </script>
 
@@ -28,5 +28,15 @@
 
     <h3>ModelAndView로 redirect 하기</h3>
     <button onclick="location.href='modelandview-redirect'">ModelAndView로 뷰 이름 반환하여 리다이렉트</button>
+
+    <h3>ModelAndView로 뷰 이름 반환하면서 flashAttribute 추가 하기</h3>
+    <button onclick="location.href='modelandview-redirect-attr'">ModelAndView로 뷰 이름 반환하여 리다이렉트</button>
+    <script>
+        const flashMessage2 = '[[${ flashMessage2 }]]';
+        console.log(flashMessage2);
+        if (flashMessage2) {
+            alert(flashMessage2);
+        }
+    </script>
 </body>
 </html>
