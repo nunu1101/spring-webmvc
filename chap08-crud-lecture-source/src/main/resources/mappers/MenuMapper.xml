@@ -12,6 +12,12 @@
         <result property="orderableStatus" column="orderable_status"/>
     </resultMap>
 
+    <resultMap id="categoryResultMap" type="com.ohgiraffers.crud.menu.model.dto.CategoryDTO">
+        <id property="code" column="category_code"/>
+        <result property="name" column="category_name"/>
+        <result property="refCategoryCode" column="ref_category_code"/>
+    </resultMap>
+
     <select id="findAllMenu" resultMap="menuResultMap">
         SELECT
                 MENU_CODE
@@ -23,4 +29,54 @@
         WHERE   ORDERABLE_STATUS = 'Y'
         ORDER BY MENU_CODE
     </select>
+
+    <select id="findAllCategory" resultMap="categoryResultMap">
+        SELECT
+                CATEGORY_CODE
+            ,   CATEGORY_NAME
+            ,   REF_CATEGORY_CODE
+        FROM    TBL_CATEGORY
+    </select>
+
+    <insert id="registNewMenu" parameterType="com.ohgiraffers.crud.menu.model.dto.MenuDTO">
+        INSERT INTO TBL_MENU
+        (
+            MENU_NAME
+        ,   MENU_PRICE
+        ,   CATEGORY_CODE
+        ,   ORDERABLE_STATUS
+        )
+        VALUES
+        (
+            #{ name }
+        ,   #{ price }
+        ,   #{ categoryCode }
+        ,   #{ orderableStatus }
+        )
+    </insert>
+
+    <select id="findMenuCodeList" resultMap="menuResultMap">
+        SELECT
+                MENU_CODE
+            ,   MENU_NAME
+            ,   MENU_PRICE
+            ,   CATEGORY_CODE
+            ,   ORDERABLE_STATUS
+        FROM    TBL_MENU
+    </select>
+
+    <update id="modifyMenu" parameterType="com.ohgiraffers.crud.menu.model.dto.MenuDTO">
+        UPDATE TBL_MENU
+        SET MENU_NAME = #{ name }
+            , MENU_PRICE = #{ price }
+            , CATEGORY_CODE = #{ categoryCode }
+            , ORDERABLE_STATUS = #{ orderableStatus }
+        WHERE MENU_CODE = #{ code }
+    </update>
+
+    <delete id="deleteMenu" parameterType="com.ohgiraffers.crud.menu.model.dto.MenuDTO">
+        DELETE
+        FROM TBL_MENU
+        WHERE MENU_CODE = #{ code }
+    </delete>
 </mapper>

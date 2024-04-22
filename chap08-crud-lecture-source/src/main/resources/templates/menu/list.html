@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        const successMessage = `[[${ successMessage }]]`;
+        if (successMessage) {
+            alert(successMessage);
+        }
+    </script>
 </head>
 <body>
+    <div th:replace="common/header.html"></div>
     <table align="center" border="1">
-        <tr>
+        <tr style="background-color: burlywood;">
             <th>메뉴번호</th>
             <th>메뉴이름</th>
             <th>메뉴가격</th>
             <th>카테고리코드</th>
             <th>판매상태</th>
         </tr>
-        <tr th:each="menu : ${ menuList }">
-            <td th:text="${ menu.code }"></td>
+        <tr th:each="menu : ${ menuList }" align="center">
+            <td th:text="${ menu.code }" style="font-weight: bold"></td>
             <td th:text="${ menu.name }"></td>
             <td th:text="${ menu.price }"></td>
             <td th:text="${ menu.categoryCode }"></td>
